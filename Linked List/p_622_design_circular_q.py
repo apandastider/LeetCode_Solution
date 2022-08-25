@@ -39,6 +39,7 @@ class MyCircularQueue:
                 self.last = value
                  
             else:
+                # not optimized very slow, a separate tail pointer can be easily solve this problem!
                 new_value = ListNode(val = value)
                 self.last = value
                 curr_node = self.head
