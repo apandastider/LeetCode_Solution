@@ -48,3 +48,44 @@ class Solution:
         dfs(curr_pos_ind, curr_pos_list)
 
         return self.counter    
+
+### 2nd attempt ---- fell into runtime error :( 
+
+from collections import deque 
+class Solution:
+    def jump(self, nums: List[int]) -> int:
+
+        curr_pos_ind = deque([0])
+
+        curr_pos_list = deque([nums[0]])
+
+        jump_count = deque([0])
+
+        self.counter = 0
+
+        def dfs(curr_pose_ind, curr_pos_list):
+            # print(curr_pos_ind, curr_pos_list)
+            # print(self.counter)
+            if curr_pos_ind[-1] == len(nums)-1:
+                # print("CC")
+                return 1
+            else:
+                # print("FF")
+                curr_jump = jump_count.popleft()
+                self.counter = curr_jump + 1
+
+                pos = curr_pos_ind.popleft()
+                val = curr_pos_list.popleft()
+
+                for i in range(val):
+                    curr_pos_ind.append(i+pos+1)
+                    curr_pos_list.append(nums[i+pos+1])
+                    jump_count.append(self.counter)
+                    if curr_pos_ind[-1] == len(nums) - 1:
+                        break
+                dfs(curr_pos_ind, curr_pos_list)
+                # self.counter -= 1
+
+        dfs(curr_pos_ind, curr_pos_list)
+
+        return self.counter    
