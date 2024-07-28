@@ -79,4 +79,51 @@ class Solution:
             num = rem
 
         return ans
+
+% new attempt
+
+class Solution:
+    def intToRoman(self, num: int) -> str:
+        hash_dict = {
+            1 : 'I',
+            4 : 'IV',
+            5 : 'V',
+            9 : 'IX',
+            10 : 'X',
+            40 : 'XL',
+            50 :'L',
+            90 :'XC',
+            100 : 'C',
+            400 : 'CD',
+            500 : 'D',
+            900 : 'CM',
+            1000 : 'M'
+        }
+
+        div = num
+        rem = 0
+        nums = [1000, 100, 10, 1]
+        indx = 0
+        res = ''
+        while indx < len(nums):
+
+            div1 = div // nums[indx]
+            div = div % nums[indx]
+
+            if indx == 0:
+                res += div1*hash_dict[nums[indx]] 
+            else:
+                if div1 == 9:
+                    res += hash_dict[nums[indx]*9]
+                elif div1 == 4:
+                    res += hash_dict[nums[indx]*4]
+                elif div1 >= 5:
+                    res += hash_dict[nums[indx]*5] + (div1-5)*hash_dict[nums[indx]]
+                else:
+                    res += div1*hash_dict[nums[indx]]
+
+
+            indx += 1
+        
+        return res
         
