@@ -19,3 +19,19 @@ class Solution:
                 else:
                     break
         return count
+
+class Solution:
+    def lengthOfLastWord(self, s: str) -> int:
+        
+        res = 0
+        flag = False
+        for i in range(len(s)-1,-1,-1):
+            # print(i)
+            if s[i] == ' ' and flag == True:
+                break
+            
+            if s[i] != ' ':
+                flag = True
+                res += 1
+
+        return res
